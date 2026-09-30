@@ -1,0 +1,25 @@
+{
+	"compilerOptions": {
+		"target": "ES2023",
+		"module": "ESNext",
+		"lib": ["ES2023"],
+		"types": [],
+		"allowArbitraryExtensions": true,
+		"skipLibCheck": true,
+
+		/* Bundler mode */
+		"moduleResolution": "bundler",
+		"allowImportingTsExtensions": false,
+		"verbatimModuleSyntax": true,
+		"moduleDetection": "force",
+		"noEmit": true,
+		"strict": true,
+
+		/* Linting */
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
+		"erasableSyntaxOnly": true,
+		"noFallthroughCasesInSwitch": true
+	},
+	"include": ["src"]
+}

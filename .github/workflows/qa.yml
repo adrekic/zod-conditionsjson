@@ -1,0 +1,68 @@
+name: qa
+on:
+    pull_request:
+        types: [opened, reopened, synchronize]
+jobs:
+    build:
+        name: build
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v5
+            - uses: volta-cli/action@v4
+            - run: echo "//registry.yarnpkg.com/:_authToken=${{ secrets.NPM_TOKEN }}" >> ~/.npmrc
+            - name: Cache dependencies
+              id: cache-dependencies
+              uses: actions/cache@v4
+              with:
+                  path: node_modules
+                  key: yarn-cache-${{ runner.os }}-${{ hashFiles('./yarn.lock') }}
+            - run: yarn install --immutable
+            - run: yarn build
+
+    type-check:
+        name: type-check
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v5
+            - uses: volta-cli/action@v4
+            - run: echo "//registry.yarnpkg.com/:_authToken=${{ secrets.NPM_TOKEN }}" >> ~/.npmrc
+            - name: Cache dependencies
+              id: cache-dependencies
+              uses: actions/cache@v4
+              with:
+                  path: node_modules
+                  key: yarn-cache-${{ runner.os }}-${{ hashFiles('./yarn.lock') }}
+            - run: yarn install --immutable
+            - run: yarn type-check
+
+    format:
+        name: format
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v5
+            - uses: volta-cli/action@v4
+            - run: echo "//registry.yarnpkg.com/:_authToken=${{ secrets.NPM_TOKEN }}" >> ~/.npmrc
+            - name: Cache dependencies
+              id: cache-dependencies
+              uses: actions/cache@v4
+              with:
+                  path: node_modules
+                  key: yarn-cache-${{ runner.os }}-${{ hashFiles('./yarn.lock') }}
+            - run: yarn install --immutable
+            - run: yarn format:check
+
+    lint:
+        name: lint
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v5
+            - uses: volta-cli/action@v4
+            - run: echo "//registry.yarnpkg.com/:_authToken=${{ secrets.NPM_TOKEN }}" >> ~/.npmrc
+            - name: Cache dependencies
+              id: cache-dependencies
+              uses: actions/cache@v4
+              with:
+                  path: node_modules
+                  key: yarn-cache-${{ runner.os }}-${{ hashFiles('./yarn.lock') }}
+            - run: yarn install --immutable
+            - run: yarn lint

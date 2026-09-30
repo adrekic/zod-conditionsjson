@@ -1,0 +1,21 @@
+{
+	"$schema": "./node_modules/oxlint/configuration_schema.json",
+	"plugins": ["oxc", "eslint", "typescript", "unicorn", "import", "node", "promise"],
+	"rules": {
+		"no-console": "error",
+		"typescript/no-explicit-any": "error"
+	},
+	"overrides": [
+		{
+			"files": ["src/index.ts"],
+			"rules": {
+				"unicorn/no-empty-file": "off"
+			}
+		}
+	],
+	"options": {
+		"typeAware": true,
+		"typeCheck": true,
+		"denyWarnings": true
+	}
+}

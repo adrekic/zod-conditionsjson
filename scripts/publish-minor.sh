@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+(npm version minor --no-git-tag-version && npm run build && npm publish --access public) || read -r -n 1 -p "Press any key to continue"
